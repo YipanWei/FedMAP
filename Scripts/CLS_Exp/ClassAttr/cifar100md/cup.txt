@@ -1,0 +1,10 @@
+cup silhouette
+cup overall shape
+cup surface texture
+cup local pattern
+cup color variation
+cup edge contrast
+cup part structure
+cup spatial layout
+cup visual detail
+cup appearance cue

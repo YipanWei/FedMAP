@@ -1,0 +1,10 @@
+Rigid Walls
+Broad Mass
+Stone Concrete
+Linear Top
+Water Edge
+Structural Scale
+Open Sky
+Hard Geometry
+Outdoor Context
+Front Angle

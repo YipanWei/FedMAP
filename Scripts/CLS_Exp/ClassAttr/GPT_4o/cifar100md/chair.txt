@@ -1,0 +1,10 @@
+Seat Surface
+Backrest Shape
+Leg Structure
+Material Texture
+Curved Outline
+Indoor Context
+Front Angle
+Support Geometry
+Color Finish
+Object Scale

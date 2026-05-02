@@ -1,0 +1,10 @@
+bottle silhouette
+bottle overall shape
+bottle surface texture
+bottle local pattern
+bottle color variation
+bottle edge contrast
+bottle part structure
+bottle spatial layout
+bottle visual detail
+bottle appearance cue

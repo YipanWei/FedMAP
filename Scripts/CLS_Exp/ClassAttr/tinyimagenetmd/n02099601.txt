@@ -1,0 +1,10 @@
+n02099601 silhouette
+n02099601 overall shape
+n02099601 surface texture
+n02099601 local pattern
+n02099601 color variation
+n02099601 edge contrast
+n02099601 part structure
+n02099601 spatial layout
+n02099601 visual detail
+n02099601 appearance cue

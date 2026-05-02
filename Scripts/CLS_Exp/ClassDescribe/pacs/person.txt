@@ -1,0 +1,10 @@
+Frontal radiograph shows upright adult outline with symmetric torso, clear limb contours, variable soft-tissue density, occasional limb positioning differences, and common imaging artifacts such as motion blur or device shadows.
+Adult shown supine with frontal chest projection, ribcage symmetric, cardiac silhouette moderate, bilateral lung fields clear with faint peribronchial markings; common variations include mild asymmetry and motion or positioning artifacts.
+Person appears supine on imaging with torso and limbs visible; variations include differing body habitus, skin attenuation, hair presence, positioning angles, abdominal contour, and asymmetric soft-tissue distribution across different populations.
+Person in medical images appears as frontal or lateral figure with visible head, torso, limbs; observable features include hair, clothing, skin tone, body shape, positioning and image contrast variations.
+Variation five depicts a frontal chest image with mild bilateral patchy opacities, preserved heart silhouette, subtle perihilar streaking, and variable opacity density, size, and distribution.
+In the image, a supine torso view shows symmetric bony outlines, soft-tissue shadowing, and variable organ silhouettes; common variations include mild contour differences, asymmetric soft-tissue densities, and positioning artifacts.
+Frontal clinical photograph of an adult with medium complexion, short dark hair, neutral expression and relaxed posture; common variations include eyewear, minor facial asymmetry, different clothing, lighting, and head tilt.
+Person in medical imaging appears supine on imaging bed, head neutral; skin tones range from pale to dark, body habitus varies from slender to large, hair presence and clothing differ.
+Person in medical images has neutral expression, short dark hair, even skin tone, symmetric facial contours, relaxed posture, variable contrast and occasional motion blur artifacts.
+Single frontal medical image shows a neutral head position with variable facial symmetry, soft-tissue contours, skin surface markings, hair presence, and occasional external devices or dressings altering visible outline.

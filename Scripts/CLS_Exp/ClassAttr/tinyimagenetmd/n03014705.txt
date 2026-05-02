@@ -1,0 +1,10 @@
+n03014705 silhouette
+n03014705 overall shape
+n03014705 surface texture
+n03014705 local pattern
+n03014705 color variation
+n03014705 edge contrast
+n03014705 part structure
+n03014705 spatial layout
+n03014705 visual detail
+n03014705 appearance cue

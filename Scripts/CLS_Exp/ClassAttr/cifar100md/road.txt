@@ -1,0 +1,10 @@
+road silhouette
+road overall shape
+road surface texture
+road local pattern
+road color variation
+road edge contrast
+road part structure
+road spatial layout
+road visual detail
+road appearance cue

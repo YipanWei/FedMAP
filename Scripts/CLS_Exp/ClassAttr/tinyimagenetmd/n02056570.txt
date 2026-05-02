@@ -1,0 +1,10 @@
+n02056570 silhouette
+n02056570 overall shape
+n02056570 surface texture
+n02056570 local pattern
+n02056570 color variation
+n02056570 edge contrast
+n02056570 part structure
+n02056570 spatial layout
+n02056570 visual detail
+n02056570 appearance cue

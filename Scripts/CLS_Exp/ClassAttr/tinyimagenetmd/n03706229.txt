@@ -1,0 +1,10 @@
+n03706229 silhouette
+n03706229 overall shape
+n03706229 surface texture
+n03706229 local pattern
+n03706229 color variation
+n03706229 edge contrast
+n03706229 part structure
+n03706229 spatial layout
+n03706229 visual detail
+n03706229 appearance cue

@@ -1,0 +1,8 @@
+AK	Actinic keratosis	AK.txt	N=10
+BCC	Basal cell carcinoma	BCC.txt	N=10
+BKL	Benign keratosis-like lesions	BKL.txt	N=10
+DF	Dermatofibroma	DF.txt	N=10
+MEL	Melanoma	MEL.txt	N=10
+NV	Melanocytic nevus	NV.txt	N=10
+SCC	Squamous cell carcinoma	SCC.txt	N=10
+VASC	Vascular lesions	VASC.txt	N=10

@@ -1,0 +1,10 @@
+n03100240 silhouette
+n03100240 overall shape
+n03100240 surface texture
+n03100240 local pattern
+n03100240 color variation
+n03100240 edge contrast
+n03100240 part structure
+n03100240 spatial layout
+n03100240 visual detail
+n03100240 appearance cue

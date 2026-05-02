@@ -1,0 +1,10 @@
+bus silhouette
+bus overall shape
+bus surface texture
+bus local pattern
+bus color variation
+bus edge contrast
+bus part structure
+bus spatial layout
+bus visual detail
+bus appearance cue

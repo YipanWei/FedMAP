@@ -1,0 +1,10 @@
+n01698640 silhouette
+n01698640 overall shape
+n01698640 surface texture
+n01698640 local pattern
+n01698640 color variation
+n01698640 edge contrast
+n01698640 part structure
+n01698640 spatial layout
+n01698640 visual detail
+n01698640 appearance cue

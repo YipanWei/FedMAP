@@ -1,0 +1,10 @@
+n01768244 silhouette
+n01768244 overall shape
+n01768244 surface texture
+n01768244 local pattern
+n01768244 color variation
+n01768244 edge contrast
+n01768244 part structure
+n01768244 spatial layout
+n01768244 visual detail
+n01768244 appearance cue

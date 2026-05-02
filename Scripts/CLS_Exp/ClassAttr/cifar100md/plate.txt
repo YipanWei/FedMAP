@@ -1,0 +1,10 @@
+plate silhouette
+plate overall shape
+plate surface texture
+plate local pattern
+plate color variation
+plate edge contrast
+plate part structure
+plate spatial layout
+plate visual detail
+plate appearance cue

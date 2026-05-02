@@ -1,0 +1,10 @@
+n01443537 silhouette
+n01443537 overall shape
+n01443537 surface texture
+n01443537 local pattern
+n01443537 color variation
+n01443537 edge contrast
+n01443537 part structure
+n01443537 spatial layout
+n01443537 visual detail
+n01443537 appearance cue

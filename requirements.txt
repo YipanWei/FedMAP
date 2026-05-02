@@ -1,0 +1,16 @@
+torch
+torchvision
+numpy
+pandas
+scipy
+scikit-learn
+scikit-image
+matplotlib
+seaborn
+tqdm
+yacs
+ftfy
+regex
+setproctitle
+openpyxl
+tabulate

@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local environments and credentials
+.env
+.venv/
+venv/
+*key*
+*secret*
+
+# IDE and OS metadata
+.idea/
+.vscode/
+.DS_Store
+
+# Local data, logs, and generated outputs
+data/
+logs/
+output/
+Docs/
+Scripts/data/
+Scripts/logs/
+Scripts/output/
+Scripts/embeddings_test_img/
+Scripts/embeddings/prompt_text_embeddings/
+Scripts/embeddings/tsne/
+
+# Large model/checkpoint artifacts
+*.pth
+*.ckpt
+*.tar
+*.tar.gz
+*.zip
+
+# Keep the small text-anchor tensors needed by FedMAP.
+*.pt
+!Scripts/embeddings/
+!Scripts/embeddings/**/
+!Scripts/embeddings/**/text/
+!Scripts/embeddings/**/text/*.pt

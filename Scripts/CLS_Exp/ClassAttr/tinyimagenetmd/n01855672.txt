@@ -1,0 +1,10 @@
+n01855672 silhouette
+n01855672 overall shape
+n01855672 surface texture
+n01855672 local pattern
+n01855672 color variation
+n01855672 edge contrast
+n01855672 part structure
+n01855672 spatial layout
+n01855672 visual detail
+n01855672 appearance cue

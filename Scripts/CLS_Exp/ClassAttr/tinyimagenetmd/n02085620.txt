@@ -1,0 +1,10 @@
+n02085620 silhouette
+n02085620 overall shape
+n02085620 surface texture
+n02085620 local pattern
+n02085620 color variation
+n02085620 edge contrast
+n02085620 part structure
+n02085620 spatial layout
+n02085620 visual detail
+n02085620 appearance cue

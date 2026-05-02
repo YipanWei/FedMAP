@@ -1,0 +1,10 @@
+n02892201 silhouette
+n02892201 overall shape
+n02892201 surface texture
+n02892201 local pattern
+n02892201 color variation
+n02892201 edge contrast
+n02892201 part structure
+n02892201 spatial layout
+n02892201 visual detail
+n02892201 appearance cue

@@ -1,0 +1,10 @@
+pickup_truck silhouette
+pickup_truck overall shape
+pickup_truck surface texture
+pickup_truck local pattern
+pickup_truck color variation
+pickup_truck edge contrast
+pickup_truck part structure
+pickup_truck spatial layout
+pickup_truck visual detail
+pickup_truck appearance cue

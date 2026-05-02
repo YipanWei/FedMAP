@@ -1,0 +1,10 @@
+table silhouette
+table overall shape
+table surface texture
+table local pattern
+table color variation
+table edge contrast
+table part structure
+table spatial layout
+table visual detail
+table appearance cue

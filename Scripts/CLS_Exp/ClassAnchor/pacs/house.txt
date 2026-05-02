@@ -1,0 +1,10 @@
+Structured building exterior
+Visible walls and roof
+Windows and door openings
+Pitched or flat rooflines
+Rectangular facade geometry
+Exterior surface textures
+Architectural style variation
+Multiple window arrangements
+Defined building silhouette
+Surrounding outdoor environment

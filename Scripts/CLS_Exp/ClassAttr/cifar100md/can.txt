@@ -1,0 +1,10 @@
+can silhouette
+can overall shape
+can surface texture
+can local pattern
+can color variation
+can edge contrast
+can part structure
+can spatial layout
+can visual detail
+can appearance cue

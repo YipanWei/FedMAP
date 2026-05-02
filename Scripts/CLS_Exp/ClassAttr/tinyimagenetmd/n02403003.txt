@@ -1,0 +1,10 @@
+n02403003 silhouette
+n02403003 overall shape
+n02403003 surface texture
+n02403003 local pattern
+n02403003 color variation
+n02403003 edge contrast
+n02403003 part structure
+n02403003 spatial layout
+n02403003 visual detail
+n02403003 appearance cue

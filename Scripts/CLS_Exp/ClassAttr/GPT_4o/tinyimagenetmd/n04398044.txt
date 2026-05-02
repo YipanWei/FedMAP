@@ -1,0 +1,10 @@
+Open Rim
+Hollow Interior
+Rounded Walls
+Smooth Surface
+Material Cue
+Object Centering
+Curved Outline
+Simple Background
+Container Depth
+Soft Reflection

@@ -1,0 +1,10 @@
+n03085013 silhouette
+n03085013 overall shape
+n03085013 surface texture
+n03085013 local pattern
+n03085013 color variation
+n03085013 edge contrast
+n03085013 part structure
+n03085013 spatial layout
+n03085013 visual detail
+n03085013 appearance cue

@@ -1,0 +1,10 @@
+A kidney ultrasound displays a bean-shaped organ in grayscale with a hypoechoic cortex, hypoechoic medullary pyramids, and a bright central echogenic sinus;  include size differences, cortical echogenicity changes,
+Kidney-view ultrasound shows a bean-shaped organ in grayscale with a hypoechoic cortical rim, more echogenic central sinus, anechoic rounded cystic spaces or dilated pelvicalyceal echoes, variable size,
+Renal ultrasound shows a bean-shaped outline with hypoechoic cortex, hyperechoic central sinus, alternating hypoechoic medullary pyramids;  include size, cortical thickness, focal anechoic cysts,
+Gray-scale kidney ultrasound shows a bean-shaped organ with a hypoechoic outer cortex, brighter echogenic central sinus, and anechoic collecting calyces when fluid-filled;  include cortical thinning
+Kidney ultrasound shows a bean-shaped organ with an outer hypoechoic cortex, hyperechoic central sinus, longitudinal orientation, variable cortical thickness, occasional anechoic cystic areas,
+Kidney-view ultrasound shows a reniform grayscale image with hypoechoic cortex surrounding more echogenic sinus and pelvis, anechoic tubular or cystic areas, variable cortical thickness and echogenicity, differing orientations,
+Kidney ultrasound typically shows a bean-shaped organ with a hypoechoic cortex surrounding a brighter, hyperechoic central renal sinus; common include cortical echogenicity changes, mild contour irregularity,
+Kidney view ultrasound typically shows a bean-shaped organ with smooth hypoechoic cortical rim and more echogenic central sinus;  may display altered echogenicity, cortical thinning, prominent sinus fat,
+Kidney-view ultrasound shows a reniform organ with hypoechoic cortex and slightly more echogenic central sinus; cortical–medullary differentiation, triangular or rounded hypoechoic pyramids,
+Renal ultrasound shows a bean-shaped organ with hypoechoic cortex and more echogenic central sinus, anechoic fluid-filled collecting system when present, varying organ size, cortical thickness, focal cystic spaces, shadowing echoes,

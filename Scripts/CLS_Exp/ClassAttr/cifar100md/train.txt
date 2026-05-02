@@ -1,0 +1,10 @@
+train silhouette
+train overall shape
+train surface texture
+train local pattern
+train color variation
+train edge contrast
+train part structure
+train spatial layout
+train visual detail
+train appearance cue

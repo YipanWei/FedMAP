@@ -1,0 +1,10 @@
+Heterogeneous retrobulbar echotexture
+Round anechoic vitreous cavity
+Tubular hypoechoic optic nerve
+Bright curvilinear lens echo
+Linear hypoechoic extraocular muscles
+Curvilinear hyperechoic scleral rim
+Reverberation and shadowing artifacts
+Hyperechoic orbital fat strands
+Coarse speckle echotexture pattern
+Fan-shaped sector grayscale image

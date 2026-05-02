@@ -1,0 +1,10 @@
+n03902125 silhouette
+n03902125 overall shape
+n03902125 surface texture
+n03902125 local pattern
+n03902125 color variation
+n03902125 edge contrast
+n03902125 part structure
+n03902125 spatial layout
+n03902125 visual detail
+n03902125 appearance cue

@@ -1,0 +1,10 @@
+n07614500 silhouette
+n07614500 overall shape
+n07614500 surface texture
+n07614500 local pattern
+n07614500 color variation
+n07614500 edge contrast
+n07614500 part structure
+n07614500 spatial layout
+n07614500 visual detail
+n07614500 appearance cue

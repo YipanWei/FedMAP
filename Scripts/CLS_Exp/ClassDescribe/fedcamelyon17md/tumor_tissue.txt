@@ -1,0 +1,10 @@
+Tumor tissue appears as densely packed, irregular cell clusters replacing normal nodal architecture, with variable cell size, pleomorphic hyperchromatic nuclei, scant cytoplasm.
+Tumor tissue patch shows densely packed cells forming irregular nests and sheets within lymphoid stroma, with variable nuclear pleomorphism, coarse chromatin, prominent nucleoli.
+tumor tissue in a lymph node WSI patch shows densely packed pleomorphic cells forming irregular nests and sheets, varying nuclear size and chromatin density.
+In lymph node WSI tumor patches, tissue often appears as densely packed pleomorphic cells forming irregular sheets and glands with variable nuclear size.
+In the patch, tumor tissue appears as densely packed, irregular cellular clusters with enlarged, variably shaped nuclei, prominent nucleoli, and scant to moderate cytoplasm.
+In lymph node WSI patches tumor tissue appears as dense cellular aggregates forming sheets, nests, or trabeculae with enlarged hyperchromatic nuclei, variable cytoplasm.
+In lymph node WSI patches, tumor tissue appears as hypercellular, irregular sheets or nests of pleomorphic cells with enlarged vesicular nuclei, conspicuous nucleoli.
+shows dense cellular sheets with variable cell size, pleomorphic hyperchromatic nuclei, occasional prominent nucleoli and mitoses, interspersed necrotic pale areas.
+tumor tissue appears as irregularly shaped nests and cords of densely packed cells replacing nodal architecture, with variable nuclear pleomorphism, hyperchromasia.
+tumor tissue displays a dense cellular patch with irregular sheets and nests of pleomorphic, hyperchromatic nuclei, variable nuclear sizes, frequent mitotic figures.

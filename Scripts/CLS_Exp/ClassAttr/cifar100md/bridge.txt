@@ -1,0 +1,10 @@
+bridge silhouette
+bridge overall shape
+bridge surface texture
+bridge local pattern
+bridge color variation
+bridge edge contrast
+bridge part structure
+bridge spatial layout
+bridge visual detail
+bridge appearance cue

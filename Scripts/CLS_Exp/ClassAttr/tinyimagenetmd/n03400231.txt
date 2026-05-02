@@ -1,0 +1,10 @@
+n03400231 silhouette
+n03400231 overall shape
+n03400231 surface texture
+n03400231 local pattern
+n03400231 color variation
+n03400231 edge contrast
+n03400231 part structure
+n03400231 spatial layout
+n03400231 visual detail
+n03400231 appearance cue

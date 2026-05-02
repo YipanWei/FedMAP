@@ -1,0 +1,4 @@
+Symmetry
+Color
+Border
+Surface Texture
