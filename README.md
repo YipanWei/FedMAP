@@ -96,7 +96,7 @@ Switch method or dataset:
 
 ```bash
 bash Scripts/run_experiment.sh --trainer FedCLIP --dataset fedcamelyon --seed 1 --gpu 0
-bash Scripts/run_experiment.sh --trainer VPT_Ma_T --dataset whu --seed 42 --gpu 1
+bash Scripts/run_experiment.sh --trainer FedMVP --dataset fedisic --seed 42 --gpu 1
 ```
 
 Pass additional options directly to `federated_main.py`:
@@ -105,7 +105,9 @@ Pass additional options directly to `federated_main.py`:
 bash Scripts/run_experiment.sh --trainer VPT_Ma --dataset fedisic --gpu 0 --num_workers 4 --lambda_struct 10
 ```
 
-Common trainers include `VPT_Ma`, `VPT_Ma_T`, `FedCLIP`, `FedMVP`, `PromptFL`, `LPT`, and `CLIP`.
+Supported public datasets are `fedisic` and `fedcamelyon`.
+
+Common trainers include `VPT_Ma`, `VPT`, `FedCLIP`, `FedMVP`, `FedAPT`, `FedCoCoOP`, `FedKgCoOP`, `FedProxLPT`, `FOCoOP`, `PROMPTFL`, and `CLIP`.
 
 ## 📦 Outputs
 

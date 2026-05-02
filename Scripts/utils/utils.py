@@ -51,46 +51,34 @@ def reset_cfg(cfg, args):
 def extend_cfg(cfg, args):
     from yacs.config import CfgNode as CN
 
+    supported_trainers = {
+        "CLIP",
+        "VPT",
+        "FedAPT",
+        "FedCLIP",
+        "FedCoCoOP",
+        "FedKgCoOP",
+        "FedProxLPT",
+        "PROMPTFL",
+        "FOCoOP",
+        "FedMVP",
+        "VPT_Ma",
+    }
+    if args.trainer not in supported_trainers:
+        raise ValueError(
+            f"Unsupported trainer '{args.trainer}'. "
+            f"Choose from: {', '.join(sorted(supported_trainers))}"
+        )
+
     cfg.TRAINER.CLIP = CN()
     cfg.TRAINER.CLIP.PREC = "fp16"
     cfg.TRAINER.CLIP.CLASS_TOKEN_POSITION = "end"
-
-    cfg.TRAINER.CLIP_OB = CN()
-    cfg.TRAINER.CLIP_OB.PREC = "fp16"
-    cfg.TRAINER.CLIP_OB.CLASS_TOKEN_POSITION = "end"
-
-    cfg.TRAINER.IVLP = CN()
-    cfg.TRAINER.IVLP.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.IVLP.N_CTX_TEXT = 16
-    cfg.TRAINER.IVLP.CTX_INIT = False
-    cfg.TRAINER.IVLP.CSC = False
-    cfg.TRAINER.IVLP.PREC = "fp16"
-    cfg.TRAINER.IVLP.PROMPT_DEPTH_VISION = (
-        1
-    )
-    cfg.TRAINER.IVLP.PROMPT_DEPTH_TEXT = (
-        1
-    )
 
     cfg.TRAINER.VPT = CN()
     cfg.TRAINER.VPT.N_CTX_VISION =args.nctxv
     cfg.TRAINER.VPT.CTX_INIT = "a photo of a"
     cfg.TRAINER.VPT.PREC = "fp16"
     cfg.TRAINER.VPT.PROMPT_DEPTH_VISION = args.prompt_depth
-
-    cfg.TRAINER.VPTPR = CN()
-    cfg.TRAINER.VPTPR.PREC = "fp16"
-    cfg.TRAINER.VPTPR.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPTPR.CTX_INIT = False
-    cfg.TRAINER.VPTPR.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPTPR.RATIO = 0.8
-
-    cfg.TRAINER.LPT = CN()
-    cfg.TRAINER.LPT.N_CTX_TEXT = args.nctx
-    cfg.TRAINER.LPT.CTX_INIT = False
-    cfg.TRAINER.LPT.CSC = False
-    cfg.TRAINER.LPT.PREC = "fp16"
-    cfg.TRAINER.LPT.PROMPT_DEPTH_TEXT = args.prompt_depth
 
     cfg.TRAINER.FedAPT = CN()
     cfg.TRAINER.FedAPT.N_CTX_TEXT = args.nctx
@@ -131,38 +119,6 @@ def extend_cfg(cfg, args):
     cfg.TRAINER.PROMPTFL.PREC = "fp16"
     cfg.TRAINER.PROMPTFL.CLASS_TOKEN_POSITION = "end"
 
-    cfg.TRAINER.PROMPTFL_OB = CN()
-    cfg.TRAINER.PROMPTFL_OB.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_OB.CSC = False
-    cfg.TRAINER.PROMPTFL_OB.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_OB.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_OB.CLASS_TOKEN_POSITION = "end"
-
-    cfg.TRAINER.PROMPTFL_Exp = CN()
-    cfg.TRAINER.PROMPTFL_Exp.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_Exp.CSC = False
-    cfg.TRAINER.PROMPTFL_Exp.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_Exp.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_Exp.CLASS_TOKEN_POSITION = "end"
-
-    cfg.TRAINER.FedTPG = CN()
-    cfg.TRAINER.FedTPG.N_CTX_TEXT = 16
-    cfg.TRAINER.FedTPG.CTX_INIT = False
-    cfg.TRAINER.FedTPG.PREC = "fp16"
-    cfg.TRAINER.FedTPG.PROMPT_DEPTH_TEXT = 1
-    cfg.TRAINER.FedTPG.D_CTX = 1
-
-    cfg.TRAINER.GL_SVDMSE_HE = CN()
-    cfg.TRAINER.GL_SVDMSE_HE.N_CTX_GLOBAL = 16  # number of context vectors
-    cfg.TRAINER.GL_SVDMSE_HE.CSC = False  # class-specific context
-    cfg.TRAINER.GL_SVDMSE_HE.CTX_INIT = False  # initialization words
-    cfg.TRAINER.GL_SVDMSE_HE.PREC = "fp16"  # fp16, fp32, amp
-    cfg.TRAINER.GL_SVDMSE_HE.CLASS_TOKEN_POSITION = "end"  # 'middle' or 'end' or 'front'
-    cfg.TRAINER.GL_SVDMSE_HE.N = 1  # number of prompts
-    cfg.TRAINER.GL_SVDMSE_HE.lambda_orthogonal = 1
-    cfg.TRAINER.GL_SVDMSE_HE.alpha = 1.0
-    cfg.TRAINER.GL_SVDMSE_HE.ratio = 0.8
-
     cfg.TRAINER.FOCoOP = CN()
     cfg.TRAINER.FOCoOP.N_CTX = args.nctx
     cfg.TRAINER.FOCoOP.CSC = False
@@ -183,93 +139,6 @@ def extend_cfg(cfg, args):
     cfg.TRAINER.FedMVP.DROPOUT = 0.0
     cfg.TRAINER.FedMVP.TEXT_TEMPLATE = "a photo of a {}."
 
-    cfg.TRAINER.PROMPTFL_KL_Global = CN()
-    cfg.TRAINER.PROMPTFL_KL_Global.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_KL_Global.CSC = False
-    cfg.TRAINER.PROMPTFL_KL_Global.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_KL_Global.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_KL_Global.CLASS_TOKEN_POSITION = "end"
-    cfg.TRAINER.PROMPTFL_KL_Global.LAM_KL =0.5
-    cfg.TRAINER.PROMPTFL_KL_Global.KD_T =2.0
-
-    cfg.TRAINER.PROMPTFL_Anchor = CN()
-    cfg.TRAINER.PROMPTFL_Anchor.N_CTX = 20
-    cfg.TRAINER.PROMPTFL_Anchor.CSC = False
-    cfg.TRAINER.PROMPTFL_Anchor.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_Anchor.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_Anchor.CLASS_TOKEN_POSITION = "end"
-
-    cfg.TRAINER.PROMPTFL_KL = CN()
-    cfg.TRAINER.PROMPTFL_KL.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_KL.CSC = False
-    cfg.TRAINER.PROMPTFL_KL.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_KL.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_KL.CLASS_TOKEN_POSITION = "end"
-    cfg.TRAINER.PROMPTFL_KL.LAM_KL =args.lambda_kl
-    cfg.TRAINER.PROMPTFL_KL.KD_T =args.kd_t
-
-    cfg.TRAINER.PROMPTFL_KL_Anchor = CN()
-    cfg.TRAINER.PROMPTFL_KL_Anchor.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_KL_Anchor.CSC = False
-    cfg.TRAINER.PROMPTFL_KL_Anchor.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_KL_Anchor.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_KL_Anchor.CLASS_TOKEN_POSITION = "end"
-    cfg.TRAINER.PROMPTFL_KL_Anchor.LAM_KL =0.5
-    cfg.TRAINER.PROMPTFL_KL_Anchor.KD_T =2.0
-    cfg.TRAINER.PROMPTFL_KL_Anchor.LAMBDA_DIVERSE = args.diverse
-    cfg.TRAINER.PROMPTFL_KL_Anchor.PROMPT_DEPTH_VISION = args.prompt_depth
-
-    cfg.TRAINER.PROMPTFL_Anchor2 = CN()
-    cfg.TRAINER.PROMPTFL_Anchor2.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_Anchor2.CSC = False
-    cfg.TRAINER.PROMPTFL_Anchor2.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_Anchor2.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_Anchor2.CLASS_TOKEN_POSITION = "end"
-    cfg.TRAINER.PROMPTFL_Anchor2.LAMBDA_DIVERSE = args.diverse
-
-    cfg.TRAINER.PROMPTFL_Anchor3 = CN()
-    cfg.TRAINER.PROMPTFL_Anchor3.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_Anchor3.CSC = False
-    cfg.TRAINER.PROMPTFL_Anchor3.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_Anchor3.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_Anchor3.CLASS_TOKEN_POSITION = "end"
-
-    cfg.TRAINER.PROMPTFL_KL_VPT = CN()
-    cfg.TRAINER.PROMPTFL_KL_VPT.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_KL_VPT.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.PROMPTFL_KL_VPT.CSC = False
-    cfg.TRAINER.PROMPTFL_KL_VPT.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_KL_VPT.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_KL_VPT.CLASS_TOKEN_POSITION = "end"
-    cfg.TRAINER.PROMPTFL_KL_VPT.LAM_KL =0.5
-    cfg.TRAINER.PROMPTFL_KL_VPT.KD_T =2.0
-    cfg.TRAINER.PROMPTFL_KL_VPT.PROMPT_DEPTH_VISION = args.prompt_depth
-
-    cfg.TRAINER.VPT_a = CN()
-    cfg.TRAINER.VPT_a.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_a.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_a.PREC = "fp16"
-    cfg.TRAINER.VPT_a.PROMPT_DEPTH_VISION = args.prompt_depth
-
-    cfg.TRAINER.VPT_LPT = CN()
-    cfg.TRAINER.VPT_LPT.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_LPT.N_CTX_TEXT = args.nctx
-    cfg.TRAINER.VPT_LPT.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_LPT.PREC = "fp16"
-    cfg.TRAINER.VPT_LPT.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_LPT.CSC = False
-
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter = CN()
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.N_CTX = args.nctx
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.CSC = False
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.CTX_INIT = False
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.PREC = "fp16"
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.CLASS_TOKEN_POSITION = "end"
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.LAM_KL =0.5
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.KD_T =2.0
-    cfg.TRAINER.PROMPTFL_KL_VPT_Inter.PROMPT_DEPTH_VISION = args.prompt_depth
-
     cfg.TRAINER.VPT_Ma = CN()
     cfg.TRAINER.VPT_Ma.N_CTX_VISION =args.nctxv
     cfg.TRAINER.VPT_Ma.CTX_INIT = "a photo of a"
@@ -278,86 +147,6 @@ def extend_cfg(cfg, args):
     cfg.TRAINER.VPT_Ma.lambda_struct = args.lambda_struct
     cfg.TRAINER.VPT_Ma.PROTO_MOMENTUM = args.proto_momentum
     cfg.TRAINER.VPT_Ma.STRUCT_LOSS = "mse"
-
-    cfg.TRAINER.VPT_M = CN()
-    cfg.TRAINER.VPT_M.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_M.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_M.PREC = "fp16"
-    cfg.TRAINER.VPT_M.PROMPT_DEPTH_VISION = args.prompt_depth
-
-    cfg.TRAINER.VPT_Ma_KL = CN()
-    cfg.TRAINER.VPT_Ma_KL.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_Ma_KL.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_KL.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_KL.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_KL.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_KL.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_KL.STRUCT_LOSS = "kl"
-
-    cfg.TRAINER.VPT_Ma_T = CN()
-    cfg.TRAINER.VPT_Ma_T.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_Ma_T.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_T.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_T.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_T.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_T.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_T.STRUCT_LOSS = "mse"
-
-    cfg.TRAINER.VPT_Ma_One = CN()
-    cfg.TRAINER.VPT_Ma_One.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_Ma_One.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_One.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_One.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_One.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_One.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_One.STRUCT_LOSS = "mse"
-
-    cfg.TRAINER.VPT_Ma_R = CN()
-    cfg.TRAINER.VPT_Ma_R.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_Ma_R.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_R.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_R.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_R.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_R.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_R.STRUCT_LOSS = "mse"
-
-    cfg.TRAINER.VPT_Ma_A = CN()
-    cfg.TRAINER.VPT_Ma_A.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_Ma_A.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_A.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_A.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_A.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_A.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_A.STRUCT_LOSS = "mse"
-    cfg.TRAINER.VPT_Ma_A.TEXT_EMB_SOURCE = args.source
-
-    cfg.TRAINER.VPT_Ma_Cos = CN()
-    cfg.TRAINER.VPT_Ma_Cos.N_CTX_VISION = args.nctxv
-    cfg.TRAINER.VPT_Ma_Cos.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_Cos.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_Cos.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_Cos.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_Cos.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_Cos.STRUCT_LOSS = "cosine"
-
-    cfg.TRAINER.VPT_Ma_Wass = CN()
-    cfg.TRAINER.VPT_Ma_Wass.N_CTX_VISION = args.nctxv
-    cfg.TRAINER.VPT_Ma_Wass.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_Wass.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_Wass.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_Wass.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_Wass.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_Wass.STRUCT_LOSS = "wasserstein"
-
-    cfg.TRAINER.VPT_Ma_Noisy = CN()
-    cfg.TRAINER.VPT_Ma_Noisy.N_CTX_VISION = args.nctxv
-    cfg.TRAINER.VPT_Ma_Noisy.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma_Noisy.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma_Noisy.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma_Noisy.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma_Noisy.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma_Noisy.STRUCT_LOSS = "mse"
-    cfg.TRAINER.VPT_Ma_Noisy.ANCHOR_NOISE_STD = 0.0
 
     if not hasattr(cfg.DATASET, "USERS"):
         cfg.DATASET.USERS = args.num_users if args.num_users is not None and args.num_users > 0 else 0

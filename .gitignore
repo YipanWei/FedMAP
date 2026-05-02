@@ -19,10 +19,10 @@ venv/
 .DS_Store
 
 # Local data, logs, and generated outputs
-data/
-logs/
-output/
-Docs/
+/data/
+/logs/
+/output/
+/Docs/
 Scripts/data/
 Scripts/logs/
 Scripts/output/

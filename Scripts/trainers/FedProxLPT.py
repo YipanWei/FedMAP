@@ -169,7 +169,7 @@ class FedProxLPT(TrainerX):
         print(self.dm.dataset)
 
         print(f"Loading CLIP (backbone: {cfg.MODEL.BACKBONE.NAME})")
-        clip_model = load_clip_to_cpu(cfg, 'IVLP')
+        clip_model = load_clip_to_cpu(cfg, 'FedProxLPT')
 
         if cfg.TRAINER.FedProxLPT.PREC == "fp32" or cfg.TRAINER.FedProxLPT.PREC == "amp":
             clip_model.float()
@@ -284,4 +284,3 @@ class FedProxLPT(TrainerX):
 
             print("Loading weights to {} " 'from "{}" (epoch = {})'.format(name, model_path, epoch))
             self._models[name].load_state_dict(state_dict, strict=False)
-

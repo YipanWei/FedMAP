@@ -250,13 +250,6 @@ class VPT_Ma(TrainerX):
         FILE_PREFIX_MAP = {
             "fedisic": "FedISIC",
             "fedcamelyon17md": "FedCamelyon17MD",
-            "covidflmd": "COVIDFLMD",
-            "whu": "WHU",
-            "pacs": "PACS",
-            "office31": "Office31",
-            "officehome": "OfficeHome",
-            "cifar100md": "CIFAR100MD",
-            "tinyimagenetmd": "TinyImageNetMD",
         }
         dataset_name = self.cfg.DATASET.NAME.lower()
         if dataset_name in FILE_PREFIX_MAP:

@@ -315,10 +315,6 @@ class FedCLIP(TrainerX):
         depth = getattr(self.cfg.TRAINER.FedCLIP, "PROMPT_DEPTH_VISION", "12")
         nctx = getattr(self.cfg.TRAINER.FedCLIP, "N_CTX_VISION", "1")
         dataset_dir_name = dataset_name
-        beta = getattr(self.cfg.DATASET, "BETA", None)
-        if beta is not None and "cifar100" in str(dataset_name).lower():
-            dataset_dir_name = f"{dataset_name}_beta_{float(beta):.1f}"
-
         # -----------------------------
         # 2) Build save path
         # -----------------------------
@@ -408,4 +404,3 @@ class FedCLIP(TrainerX):
         model.img_adap.train()
 
         print("🎉 Finished saving test image embeddings.", flush=True)
-

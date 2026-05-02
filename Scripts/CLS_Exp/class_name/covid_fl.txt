@@ -1,3 +1,0 @@
-covid19 chest x-ray
-normal chest x-ray
-pneumonia chest x-ray

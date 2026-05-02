@@ -85,8 +85,6 @@ class AttributeBank(nn.Module):
         FILE_PREFIX_MAP = {
             "fedisic": "FedISIC",
             "fedcamelyon17md": "FedCamelyon17MD",
-            "covidflmd": "COVIDFLMD",
-            "whu": "WHU",
         }
         return FILE_PREFIX_MAP.get(self.dataset, self.dataset)
 

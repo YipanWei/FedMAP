@@ -93,7 +93,7 @@ def trainer_vptpr(args, cfg, epoch, local_trainer, global_weights,
 
 
 
-# ------------------ 3) VPT / LPT / IVLP / PROMPTFL 共用 ------------------ #
+# ------------------ 3) VPT / PROMPTFL 共用 ------------------ #
 def trainer_default_fed(args, cfg, epoch, local_trainer, global_weights,
                         local_weights, global_test_acc_dict, global_time_list, start,datanumber_client):
 
@@ -122,7 +122,7 @@ def trainer_default_fed(args, cfg, epoch, local_trainer, global_weights,
     return global_weights, global_test_acc_dict
 
 
-# ------------------ 3) VPT / LPT / IVLP / PROMPTFL 共用 ------------------ #
+# ------------------ 3) VPT / PROMPTFL 共用 ------------------ #
 def trainer_tsne_fed(args, cfg, epoch, local_trainer, global_weights,
                         local_weights, global_test_acc_dict, global_time_list, start,datanumber_client):
 
@@ -264,41 +264,14 @@ def trainer_promptfl_observe(args, cfg, epoch, local_trainer, global_weights,
 # ------------------ 4) 注册表 ------------------ #
 TRAINER_METHODS = {
     "CLIP": trainer_clip,
-    "CLIP_OB":trainer_clip_ob,
-    "VPTPR": trainer_vptpr,
     "VPT": trainer_tsne_fed,
-    "LPT": trainer_default_fed,
-    "IVLP": trainer_default_fed,
     "FedAPT":trainer_default_fed,
     "FedCLIP":trainer_tsne_fed,
     "FedCoCoOP":trainer_default_fed,
     "FedKgCoOP":trainer_default_fed,
     "FedProxLPT":trainer_default_fed,
-    "FedTPG":trainer_default_fed,
     "PROMPTFL": trainer_default_fed,
-    "PROMPTFL_OB":trainer_promptfl_observe,
-    "PROMPTFL_Exp":trainer_promptfl_observe,
-    "GL_SVDMSE_HE":trainer_default_fed,
     "FOCoOP":trainer_default_fed_focoop,
     "FedMVP":trainer_default_fed,
-    "PROMPTFL_KL_Global":trainer_promptfl_observe,
-    "PROMPTFL_Anchor":trainer_default_fed,
-    "PROMPTFL_KL":trainer_promptfl_observe,
-    "PROMPTFL_KL_Anchor":trainer_default_fed,
-    "PROMPTFL_Anchor2":trainer_default_fed,
-    "PROMPTFL_Anchor3":trainer_default_fed,
-    "PROMPTFL_KL_VPT":trainer_default_fed,
-    "VPT_a":trainer_default_fed,
-    "VPT_LPT":trainer_tsne_fed,
-    "PROMPTFL_KL_VPT_Inter":trainer_default_fed,
     "VPT_Ma":trainer_default_fed,
-    "VPT_M":trainer_default_fed,
-    "VPT_Ma_KL":trainer_default_fed,
-    "VPT_Ma_T":trainer_tsne_fed,
-    "VPT_Ma_One":trainer_default_fed,
-    "VPT_Ma_R":trainer_default_fed,
-    "VPT_Ma_A":trainer_default_fed,
-    "VPT_Ma_Cos":trainer_default_fed,
-    "VPT_Ma_Wass":trainer_default_fed,
-    "VPT_Ma_Noisy":trainer_default_fed
 }

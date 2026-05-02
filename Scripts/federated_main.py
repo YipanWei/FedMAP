@@ -38,7 +38,7 @@ def main(args):
     # count_parameters(local_trainer.model, "text_encoder")
     datanumber_client = []
 
-    if args.trainer == "CLIP" or args.trainer == "CLIP_OB":
+    if args.trainer == "CLIP":
         global_weights = copy.deepcopy(local_trainer.model.state_dict())
     else:
         if args.aggregation == "Weight":
@@ -61,7 +61,7 @@ def main(args):
 
     trainer_fn = TRAINER_METHODS[args.trainer]
 
-    if args.trainer == "CLIP" or args.trainer =="CLIP_OB":
+    if args.trainer == "CLIP":
         global_weights, global_test_acc_dict = trainer_fn(
             args, cfg, 0, local_trainer, global_weights, local_weights,
             global_test_acc_dict, global_time_list, start,datanumber_client
@@ -114,14 +114,13 @@ if __name__ == "__main__":
         type=str,
         default="VPT",
         help="name of trainer, choose from: "
-        "FedAPT, FedCLIP, FedCoCoOP, FedKgCoOP,  FedproxLPT, FedTPG,IVLP,LPT, PromptFL,VPT",
+        "CLIP, FedAPT, FedCLIP, FedCoCoOP, FedKgCoOP, FedProxLPT, FedMVP, FOCoOP, PROMPTFL, VPT, VPT_Ma",
     )
     parser.add_argument(
         "--dataset",
         type=str,
-        default="cifar100",
-        help="name of dataset, choose from: tyimagenet"
-        " cifar100 domainnet  OfficeHome  Office31 ",
+        default="fedisic",
+        help="name of dataset, choose from: fedisic, fedcamelyon",
     )
     parser.add_argument(
         "--backbone", type=str, default="ViT-B/16", help="name of CNN backbone"
@@ -164,7 +163,7 @@ if __name__ == "__main__":
         "--partition",
         type=str,
         default="noniid-labeldir",
-        help="the data partitioning strategy of  cifar100,"
+        help="the data partitioning strategy,"
         ' select from "noniid-labeluni, noniid-labeldir,noniid-labeldir100"',
     )
   

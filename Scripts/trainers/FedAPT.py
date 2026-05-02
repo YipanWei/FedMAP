@@ -57,8 +57,7 @@ def load_cls_exp(dataset_name, classnames, mode="global", client_id=None):
 
     返回：
         {
-            "covid_chest_x-ray": ["exp1", "exp2", ...],
-            "pneumonia_chest_x-ray": ["exp1", "exp2", ...],
+            "class_name": ["exp1", "exp2", ...],
             ...
         }
     """

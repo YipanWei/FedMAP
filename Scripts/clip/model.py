@@ -317,16 +317,17 @@ class Transformer(nn.Module):
         # Implements respective encoder blocks for a given design choice
         current_trainer = design_details['trainer']
         self.current_trainer = current_trainer
-        if current_trainer in ['IVLP', 'VPT', 'LPT', 'VPTPR','PROMPTFL_KL_Anchor','VPT_a']:
+        if current_trainer in ['VPT']:
             self.resblocks = nn.Sequential(*[ResidualAttentionBlock_VPT(width, heads, attn_mask, True,
                                                                         text_layer, i,
                                                                         design_details) if prompts_needed > i
                                              else ResidualAttentionBlock_VPT(width, heads, attn_mask, False,
                                                                              text_layer, i, design_details)
                                              for i in range(layers)])
-        elif current_trainer in ['CLIP', 'FedCoCoOP', 'CoCoOp', 'PROMPTFL', 'GLP_OT', 'FedTPG','FedAPT','FedKgCoOP',
-                                 'FedProxLPT','CLIP_OB','PROMPTFL_OB','PROMPTFL_Exp','FOCoOP','FedMVP','PROMPTFL_KL_Global',
-                                 'PROMPTFL_Anchor','PROMPTFL_KL']:
+        elif current_trainer in [
+            'CLIP', 'FedCoCoOP', 'CoCoOp', 'PROMPTFL', 'FedAPT',
+            'FedKgCoOP', 'FedProxLPT', 'FOCoOP', 'FedMVP',
+        ]:
             self.resblocks = nn.Sequential(*[ResidualAttentionBlock(width, heads, attn_mask) for _ in range(layers)])
 
     def forward(self, x: torch.Tensor,prompts=None, text_prompt=True):

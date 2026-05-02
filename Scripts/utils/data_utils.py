@@ -79,20 +79,6 @@ def prepare_data_domain_partition_train(cfg, data_base_path):
                 partition_mode="dirichlet",  # 'dirichlet' or 'percent'
             )
 
-        elif cfg.DATASET.NAME == 'COVIDFLMD':
-            global_domain_trainset = COVIDFLDataset(data_base_path, current_domain_name, transform=transform_train,
-                                                     train=True)
-            global_domain_testset = COVIDFLDataset(data_base_path, current_domain_name, transform=transform_test,
-                                                    train=False)
-            net_dataidx_map_train, net_dataidx_map_test = Dataset_partition_domain(
-                global_domain_trainset,
-                global_domain_testset,
-                beta=cfg.DATASET.BETA,
-                K=len(global_domain_trainset.classnames),
-                n_parties=domain_n_clients,
-                min_require_size=min_pic_require_size,
-                partition_mode="dirichlet",  # 'dirichlet' or 'percent'
-            )
         elif cfg.DATASET.NAME == 'FedCamelyon17MD':
             global_domain_trainset = FedCamelyon17MDDataset(data_base_path, current_domain_name, transform=transform_train,
                                                             train=True)
@@ -107,34 +93,6 @@ def prepare_data_domain_partition_train(cfg, data_base_path):
                 min_require_size=min_pic_require_size,
                 partition_mode="percent",  # 'dirichlet' or 'percent'
                 percent=cfg.DATASET.DOMAIN_P,
-            )
-        elif cfg.DATASET.NAME == 'WHU':
-            global_domain_trainset = WHUDataset(data_base_path, current_domain_name, transform=transform_train,
-                                                            train=True)
-            global_domain_testset = WHUDataset(data_base_path, current_domain_name, transform=transform_test,
-                                                           train=False)
-            net_dataidx_map_train, net_dataidx_map_test = Dataset_partition_domain(
-                global_domain_trainset,
-                global_domain_testset,
-                beta=cfg.DATASET.BETA,
-                K = len(global_domain_trainset.classnames),
-                n_parties=domain_n_clients,
-                min_require_size=min_pic_require_size,
-                partition_mode="percent",  # 'dirichlet' or 'percent'
-                percent=cfg.DATASET.DOMAIN_P,
-            )
-        elif cfg.DATASET.NAME == 'PACS':
-            global_domain_trainset = PACSDataset(data_base_path, current_domain_name, transform=transform_train,
-                                                    train=True)
-            global_domain_testset = PACSDataset(data_base_path, current_domain_name, transform=transform_test,
-                                                   train=False)
-            net_dataidx_map_train, net_dataidx_map_test = Dataset_partition_domain(
-                global_domain_trainset, global_domain_testset,
-                beta=cfg.DATASET.BETA,
-                K=len(global_domain_trainset.classnames),
-                n_parties=domain_n_clients,
-                min_require_size=min_pic_require_size,
-                partition_mode="dirichlet",  # 'dirichlet' or 'percent'
             )
         else:
             raise ValueError(f"Unsupported DATASET.NAME: {cfg.DATASET.NAME}")
@@ -178,21 +136,6 @@ def prepare_data_domain_partition_train(cfg, data_base_path):
                     transform=transform_test
                 ).data_detailed
 
-            elif cfg.DATASET.NAME == 'COVIDFLMD':
-                domain_trainset[i] = COVIDFLDataset(
-                    data_base_path,
-                    current_domain_name,
-                    net_dataidx_map_train[i],
-                    transform=transform_train
-                )
-                domain_testset[i] = COVIDFLDataset(
-                    data_base_path,
-                    current_domain_name,
-                    net_dataidx_map_test[i],
-                    train=False,
-                    transform=transform_test
-                ).data_detailed
-
             elif cfg.DATASET.NAME == 'FedCamelyon17MD':
                 domain_trainset[i] = FedCamelyon17MDDataset(
                     data_base_path,
@@ -201,35 +144,6 @@ def prepare_data_domain_partition_train(cfg, data_base_path):
                     transform=transform_train
                 )
                 domain_testset[i] = FedCamelyon17MDDataset(
-                    data_base_path,
-                    current_domain_name,
-                    net_dataidx_map_test[i],
-                    train=False,
-                    transform=transform_test
-                ).data_detailed
-
-            elif cfg.DATASET.NAME == 'WHU':
-                domain_trainset[i] = WHUDataset(
-                    data_base_path,
-                    current_domain_name,
-                    net_dataidx_map_train[i],
-                    transform=transform_train
-                )
-                domain_testset[i] = WHUDataset(
-                    data_base_path,
-                    current_domain_name,
-                    net_dataidx_map_test[i],
-                    train=False,
-                    transform=transform_test
-                ).data_detailed
-            elif cfg.DATASET.NAME == 'PACS':
-                domain_trainset[i] = PACSDataset(
-                    data_base_path,
-                    current_domain_name,
-                    net_dataidx_map_train[i],
-                    transform=transform_train
-                )
-                domain_testset[i] = PACSDataset(
                     data_base_path,
                     current_domain_name,
                     net_dataidx_map_test[i],
@@ -336,72 +250,6 @@ class FedISICDataset(Dataset):
         return image, y
 
 
-COVID_CLASSNAMES = ["normal chest x-ray", "pneumonia chest x-ray", "covid19 chest x-ray"]
-COVID_CLASS2IDX = {c: i for i, c in enumerate(COVID_CLASSNAMES)}
-
-class COVIDFLDataset(Dataset):
-    def __init__(self, base_path, center, net_dataidx_map=None, train=True, transform=None):
-        self.base_path = os.path.join(base_path,"COVID-FL-MD")
-        self.center = str(center)
-        self.site = self.center
-        self.train = train
-        self.transform = transform
-
-
-        split = "train" if train else "test"
-        split_dir = os.path.join(self.base_path, self.center, split)
-        if not os.path.isdir(split_dir):
-            raise FileNotFoundError(f"找不到数据目录: {split_dir}")
-
-        ds = ImageFolder(split_dir, transform=None)
-        paths = [p for (p, _) in ds.samples]
-
-        labels = []
-        for p in paths:
-            cls_name = os.path.basename(os.path.dirname(p))
-            if "." in cls_name:
-                cls_name = cls_name.split(".")[0]
-            if cls_name not in COVID_CLASS2IDX:
-                raise KeyError(
-                    f"未知类别文件夹: {cls_name}，请确保类名属于 {COVID_CLASSNAMES}"
-                )
-            labels.append(COVID_CLASS2IDX[cls_name])
-
-        self.imgs = np.asarray(paths)
-        self.labels = np.asarray(labels, dtype=np.int64)
-        self.label = self.labels
-        self.classnames = COVID_CLASSNAMES[:]
-        self.lab2cname = {i: c for i, c in enumerate(self.classnames)}
-
-        if net_dataidx_map is not None:
-            idx = np.asarray(net_dataidx_map, dtype=np.int64)
-            self.imgs = self.imgs[idx]
-            self.labels = self.labels[idx]
-            self.label = self.labels
-
-        self.data_detailed = self._convert()
-
-    def _convert(self):
-        data = []
-        for i in range(len(self.labels)):
-            path = self.imgs[i]
-            y = int(self.labels[i])
-            cname = self.lab2cname[y]
-            data.append(Datum(impath=path, label=y, domain=self.center, classname=cname))
-        return data
-
-    def __len__(self):
-        return len(self.labels)
-
-    def __getitem__(self, idx):
-        img_path = self.imgs[idx]
-        y = int(self.labels[idx])
-        image = Image.open(img_path).convert("RGB")
-        if self.transform is not None:
-            image = self.transform(image)
-        return image, y
-
-
 def record_net_data_stats(y_train, net_dataidx_map):
     net_cls_counts = {}
     for net_i, dataidx in net_dataidx_map.items():
@@ -448,159 +296,6 @@ class FedCamelyon17MDDataset(Dataset):
         self.labels = np.asarray(labels, dtype=np.int64)
         self.label = self.labels
         self.classnames = CAMELYON17_CLASSNAMES[:]
-        self.lab2cname = {i: c for i, c in enumerate(self.classnames)}
-
-        if net_dataidx_map is not None:
-            idx = np.asarray(net_dataidx_map, dtype=np.int64)
-            self.imgs = self.imgs[idx]
-            self.labels = self.labels[idx]
-            self.label = self.labels
-
-        self.data_detailed = self._convert()
-
-    def _convert(self):
-        data = []
-        for i in range(len(self.labels)):
-            path = self.imgs[i]
-            y = int(self.labels[i])
-            cname = self.lab2cname[y]
-            data.append(Datum(impath=path, label=y, domain=self.center, classname=cname))
-        return data
-
-    def __len__(self):
-        return len(self.labels)
-
-    def __getitem__(self, idx):
-        img_path = self.imgs[idx]
-        y = int(self.labels[idx])
-        image = Image.open(img_path).convert("RGB")
-        if self.transform is not None:
-            image = self.transform(image)
-        return image, y
-
-WHU_CLASSNAMES = [
-    "Abdominal Axial View Ultrasound",
-    "Abdominal Circumference Ultrasound",
-    "Bladder View Ultrasound",
-    "Cerebellum View Ultrasound",
-    "Crown Rump Length Ultrasound",
-    "Eye Orbit View Ultrasound",
-    "Femur Length Ultrasound",
-    "Kidney View Ultrasound",
-    "Left Ventricular Outflow Tract Ultrasound",
-    "Nuchal Translucency Ultrasound",
-    "Right Ventricular Outflow Tract Ultrasound",
-    "Side Face View Ultrasound",
-    "Three Vessel View Ultrasound",
-]
-WHU_CLASS2IDX = {c: i for i, c in enumerate(WHU_CLASSNAMES)}
-
-
-class WHUDataset(Dataset):
-    def __init__(self, base_path, center, net_dataidx_map=None, train=True, transform=None):
-        self.base_path = os.path.join(base_path, "WHU")
-        self.center = str(center)
-        self.site = self.center
-        self.train = train
-        self.transform = transform
-
-        split = "train" if train else "test"
-        split_dir = os.path.join(self.base_path, self.center, split)
-        if not os.path.isdir(split_dir):
-            raise FileNotFoundError(f"找不到数据目录: {split_dir}")
-
-        ds = ImageFolder(split_dir, transform=None)
-        paths = [p for (p, _) in ds.samples]
-
-        labels = []
-        for p in paths:
-            cls_name = os.path.basename(os.path.dirname(p))
-            if "." in cls_name:
-                cls_name = cls_name.split(".")[0]
-            if cls_name not in WHU_CLASS2IDX:
-                raise KeyError(
-                    f"未知类别文件夹: {cls_name}，请确保类名属于 {WHU_CLASSNAMES}"
-                )
-            labels.append(WHU_CLASS2IDX[cls_name])
-
-        self.imgs = np.asarray(paths)
-        self.labels = np.asarray(labels, dtype=np.int64)
-        self.label = self.labels
-        self.classnames = WHU_CLASSNAMES[:]
-        self.lab2cname = {i: c for i, c in enumerate(self.classnames)}
-
-        if net_dataidx_map is not None:
-            idx = np.asarray(net_dataidx_map, dtype=np.int64)
-            self.imgs = self.imgs[idx]
-            self.labels = self.labels[idx]
-            self.label = self.labels
-
-        self.data_detailed = self._convert()
-
-    def _convert(self):
-        data = []
-        for i in range(len(self.labels)):
-            path = self.imgs[i]
-            y = int(self.labels[i])
-            cname = self.lab2cname[y]
-            data.append(Datum(impath=path, label=y, domain=self.center, classname=cname))
-        return data
-
-    def __len__(self):
-        return len(self.labels)
-
-    def __getitem__(self, idx):
-        img_path = self.imgs[idx]
-        y = int(self.labels[idx])
-        image = Image.open(img_path).convert("RGB")
-        if self.transform is not None:
-            image = self.transform(image)
-        return image, y
-
-
-PACS_CLASSNAMES = [
-    "dog",
-    "elephant",
-    "giraffe",
-    "guitar",
-    "horse",
-    "house",
-    "person",
-]
-PACS_CLASS2IDX = {c: i for i, c in enumerate(PACS_CLASSNAMES)}
-
-
-class PACSDataset(Dataset):
-    def __init__(self, base_path, center, net_dataidx_map=None, train=True, transform=None):
-        self.base_path = os.path.join(base_path, "PACS")
-        self.center = str(center)
-        self.site = self.center
-        self.train = train
-        self.transform = transform
-
-        split = "train" if train else "test"
-        split_dir = os.path.join(self.base_path, self.center, split)
-        if not os.path.isdir(split_dir):
-            raise FileNotFoundError(f"找不到数据目录: {split_dir}")
-
-        ds = ImageFolder(split_dir, transform=None)
-        paths = [p for (p, _) in ds.samples]
-
-        labels = []
-        for p in paths:
-            cls_name = os.path.basename(os.path.dirname(p))
-            if "." in cls_name:
-                cls_name = cls_name.split(".")[0]
-            if cls_name not in PACS_CLASS2IDX:
-                raise KeyError(
-                    f"未知类别文件夹: {cls_name}，请确保类名属于 {PACS_CLASSNAMES}"
-                )
-            labels.append(PACS_CLASS2IDX[cls_name])
-
-        self.imgs = np.asarray(paths)
-        self.labels = np.asarray(labels, dtype=np.int64)
-        self.label = self.labels
-        self.classnames = PACS_CLASSNAMES[:]
         self.lab2cname = {i: c for i, c in enumerate(self.classnames)}
 
         if net_dataidx_map is not None:
