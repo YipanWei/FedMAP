@@ -6,12 +6,6 @@
 
 **ICML 2026 Regular Paper**
 
-[![Conference](https://img.shields.io/badge/ICML-2026-4B6CFF)](https://icml.cc/)
-[![OpenReview](https://img.shields.io/badge/OpenReview-3LymHCdeRd-8A2BE2)](https://openreview.net/forum?id=3LymHCdeRd)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/Backbone-CLIP-FF6F00)](https://github.com/openai/CLIP)
-
 <p>
   <b>Federated Learning</b> ·
   <b>Medical Imaging</b> ·
