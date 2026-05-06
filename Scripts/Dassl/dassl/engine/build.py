@@ -10,7 +10,7 @@ from trainers.PromptFL import PROMPTFL
 from trainers.FedProxLPT import FedProxLPT
 from trainers.FOCoOP import FOCoOP
 from trainers.FedMVP import FedMVP
-from trainers.VPT_Ma import VPT_Ma
+from trainers.FedMAP import FedMAP
 
 TRAINER_REGISTRY = Registry("TRAINER")
 
@@ -24,7 +24,7 @@ TRAINER_REGISTRY.register(PROMPTFL)
 TRAINER_REGISTRY.register(FedProxLPT)
 TRAINER_REGISTRY.register(FOCoOP)
 TRAINER_REGISTRY.register(FedMVP)
-TRAINER_REGISTRY.register(VPT_Ma)
+TRAINER_REGISTRY.register(FedMAP)
 
 def build_trainer(args,cfg):
     avai_trainers = TRAINER_REGISTRY.registered_names()

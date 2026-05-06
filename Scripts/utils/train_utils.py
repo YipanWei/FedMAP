@@ -273,5 +273,5 @@ TRAINER_METHODS = {
     "PROMPTFL": trainer_default_fed,
     "FOCoOP":trainer_default_fed_focoop,
     "FedMVP":trainer_default_fed,
-    "VPT_Ma":trainer_default_fed,
+    "FedMAP":trainer_default_fed,
 }

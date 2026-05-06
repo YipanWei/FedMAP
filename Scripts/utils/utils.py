@@ -62,7 +62,7 @@ def extend_cfg(cfg, args):
         "PROMPTFL",
         "FOCoOP",
         "FedMVP",
-        "VPT_Ma",
+        "FedMAP",
     }
     if args.trainer not in supported_trainers:
         raise ValueError(
@@ -139,14 +139,14 @@ def extend_cfg(cfg, args):
     cfg.TRAINER.FedMVP.DROPOUT = 0.0
     cfg.TRAINER.FedMVP.TEXT_TEMPLATE = "a photo of a {}."
 
-    cfg.TRAINER.VPT_Ma = CN()
-    cfg.TRAINER.VPT_Ma.N_CTX_VISION =args.nctxv
-    cfg.TRAINER.VPT_Ma.CTX_INIT = "a photo of a"
-    cfg.TRAINER.VPT_Ma.PREC = "fp16"
-    cfg.TRAINER.VPT_Ma.PROMPT_DEPTH_VISION = args.prompt_depth
-    cfg.TRAINER.VPT_Ma.lambda_struct = args.lambda_struct
-    cfg.TRAINER.VPT_Ma.PROTO_MOMENTUM = args.proto_momentum
-    cfg.TRAINER.VPT_Ma.STRUCT_LOSS = "mse"
+    cfg.TRAINER.FedMAP = CN()
+    cfg.TRAINER.FedMAP.N_CTX_VISION =args.nctxv
+    cfg.TRAINER.FedMAP.CTX_INIT = "a photo of a"
+    cfg.TRAINER.FedMAP.PREC = "fp16"
+    cfg.TRAINER.FedMAP.PROMPT_DEPTH_VISION = args.prompt_depth
+    cfg.TRAINER.FedMAP.lambda_struct = args.lambda_struct
+    cfg.TRAINER.FedMAP.PROTO_MOMENTUM = args.proto_momentum
+    cfg.TRAINER.FedMAP.STRUCT_LOSS = "mse"
 
     if not hasattr(cfg.DATASET, "USERS"):
         cfg.DATASET.USERS = args.num_users if args.num_users is not None and args.num_users > 0 else 0

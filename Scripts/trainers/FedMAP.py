@@ -32,7 +32,7 @@ def _get_trainer_cfg(cfg, trainer_name):
     return getattr(cfg.TRAINER, trainer_name)
 
 
-def load_clip_to_cpu(cfg, trainer_name="VPT_Ma"):
+def load_clip_to_cpu(cfg, trainer_name="FedMAP"):
     # (保持你原代码不变)
     backbone_name = cfg.MODEL.BACKBONE.NAME
     url = clip._MODELS[backbone_name]
@@ -73,7 +73,7 @@ class TextEncoder(nn.Module):
 # 核心修改区域：CustomCLIP 实现机制 A 和 机制 B
 # ============================================================
 class CustomCLIP(nn.Module):
-    def __init__(self, cfg, classnames, clip_model, trainer_name="VPT_Ma"):
+    def __init__(self, cfg, classnames, clip_model, trainer_name="FedMAP"):
         super().__init__()
         trainer_cfg = _get_trainer_cfg(cfg, trainer_name)
         # ... (基础组件保持不变) ...
@@ -219,7 +219,7 @@ class CustomCLIP(nn.Module):
         return logits,image_features,self.fixed_text_anchors,loss_struct
 
 
-class VPT_Ma(TrainerX):
+class FedMAP(TrainerX):
     def _trainer_name(self):
         return type(self).__name__
 

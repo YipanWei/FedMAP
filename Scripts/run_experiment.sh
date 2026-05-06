@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-python}"
 
-TRAINER="VPT_Ma"
+TRAINER="FedMAP"
 DATASET="fedisic"
 SEED="1"
 GPU="0"
@@ -31,10 +31,10 @@ while [[ $# -gt 0 ]]; do
     --help|-h)
       cat <<'USAGE'
 Usage:
-  bash Scripts/run_experiment.sh --trainer VPT_Ma --dataset fedisic --seed 1 --gpu 0 [extra federated_main.py args]
+  bash Scripts/run_experiment.sh --trainer FedMAP --dataset fedisic --seed 1 --gpu 0 [extra federated_main.py args]
 
 Defaults:
-  --trainer VPT_Ma
+  --trainer FedMAP
   --dataset fedisic
   --seed 1
   --gpu 0

@@ -112,9 +112,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--trainer",
         type=str,
-        default="VPT",
+        default="FedMAP",
         help="name of trainer, choose from: "
-        "CLIP, FedAPT, FedCLIP, FedCoCoOP, FedKgCoOP, FedProxLPT, FedMVP, FOCoOP, PROMPTFL, VPT, VPT_Ma",
+        "CLIP, FedAPT, FedCLIP, FedCoCoOP, FedKgCoOP, FedProxLPT, FedMVP, FOCoOP, PROMPTFL, VPT, FedMAP",
     )
     parser.add_argument(
         "--dataset",
@@ -314,7 +314,7 @@ if __name__ == "__main__":
         "--proto_momentum",
         type=float,
         default=0.9,
-        help="EMA momentum for prototype updates in VPT_Ma-style trainers.",
+        help="EMA momentum for prototype updates in FedMAP-style trainers.",
     )
 
     parser.add_argument(

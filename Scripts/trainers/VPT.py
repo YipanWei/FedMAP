@@ -384,7 +384,7 @@ class VPT(TrainerX):
 
     def _get_trainer_depth_nctx(self):
         cfg = self.cfg
-        trainer_name = cfg.TRAINER.NAME  # e.g. "VPT_Ma"
+        trainer_name = cfg.TRAINER.NAME  # e.g. "FedMAP"
 
         # 1) 优先尝试 cfg.TRAINER.<trainer_name>
         trainer_cfg = getattr(cfg.TRAINER, trainer_name, None)

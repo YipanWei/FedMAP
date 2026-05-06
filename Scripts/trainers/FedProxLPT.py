@@ -12,6 +12,7 @@ from Dassl.dassl.optim import build_optimizer, build_lr_scheduler
 from Dassl.dassl.utils import (
     load_checkpoint, load_pretrained_weights
 )
+from trainers.utils.fedprox import fedprox_penalty
 
 _tokenizer = _Tokenizer()
 
@@ -220,12 +221,11 @@ class FedProxLPT(TrainerX):
             output, image_features, text_features, naive_image_features, naive_text_features = self.model(image)
 
             mu = self.cfg.TRAINER.FedProxLPT.mu
-            fed_prox_reg = 0
+            fed_prox_reg = output.new_zeros(())
+            global_prompt = kwargs['global_weights']['prompt_learner.ctx']
             for param_index, param in enumerate(self.model.prompt_learner.parameters()):
                 model_weight = param
-                global_weights = kwargs['global_weights']['prompt_learner.ctx']
-
-                fed_prox_reg += ((mu / 2) * torch.norm((model_weight - global_weights)) ** 2)
+                fed_prox_reg += fedprox_penalty(model_weight, global_prompt, mu)
 
             # fed_prox_reg = ((mu / 2) * torch.norm((model_weight - global_weights)) ** 2)
             loss_fed_prox = fed_prox_reg
