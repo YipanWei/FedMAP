@@ -151,7 +151,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--num_workers",
         type=int,
-        default=0,
+        default=8,
         help="Number of DataLoader workers. Use 0 in restricted environments.",
     )
     parser.add_argument(
