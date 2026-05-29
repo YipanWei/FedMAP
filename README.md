@@ -1,4 +1,4 @@
-# FedMAP: Rethinking Federated Prompt Learning for Medical Images
+# Rethinking Federated Prompt Learning for Medical Images: From Textual Tuning to Visual Manifold Anchoring
 
 <p align="center">
   <a href="https://openreview.net/forum?id=3LymHCdeRd">
@@ -16,25 +16,17 @@
 </p>
 
 <p align="center">
-  <b>Rethinking Federated Prompt Learning for Medical Images: From Textual Tuning to Visual Manifold Anchoring</b>
+  <b>ICML-2026</b>
 </p>
 
 <p align="center">
-  Yipan Wei, Wenke Huang, Yapeng Li, He Li, Qixin Zhang, Mang Ye, Bo Du
-</p>
-
-<p align="center">
-  <b>ICML 2026 Regular Paper</b>
-</p>
-
-<p align="center">
-  <a href="#-introduction">Introduction</a> •
-  <a href="#-motivation">Motivation</a> •
-  <a href="#-methods">Methods</a> •
-  <a href="#-contributions">Contributions</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-main-results">Main Results</a> •
-  <a href="#-citation">Citation</a>
+  📌 <a href="#-introduction">Introduction</a> •
+  🎯 <a href="#-motivation">Motivation</a> •
+  🧠 <a href="#-methods">Methods</a> •
+  ✨ <a href="#-contributions">Contributions</a> •
+  🚀 <a href="#-quick-start">Quick Start</a> •
+  📊 <a href="#-main-results">Main Results</a> •
+  📚 <a href="#-citation">Citation</a>
 </p>
 
 <p align="center">
