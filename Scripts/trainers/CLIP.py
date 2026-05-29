@@ -75,7 +75,7 @@ class PromptLearner(nn.Module):
         assert cfg_imsize == clip_imsize, f"cfg_imsize ({cfg_imsize}) must equal to clip_imsize ({clip_imsize})"
 
 
-        ctx_init = ""
+        ctx_init = cfg.TRAINER.CLIP.CTX_INIT
         ctx_init = ctx_init.replace("_", " ")
         
         prompt_prefix = ctx_init
@@ -258,7 +258,6 @@ class CLIP(TrainerX):
             print("Loading weights to {} " 'from "{}" (epoch = {})'.format(name, model_path, epoch))
 
             self._models[name].load_state_dict(state_dict, strict=False)
-
 
 
 

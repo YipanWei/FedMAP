@@ -72,6 +72,7 @@ def extend_cfg(cfg, args):
 
     cfg.TRAINER.CLIP = CN()
     cfg.TRAINER.CLIP.PREC = "fp16"
+    cfg.TRAINER.CLIP.CTX_INIT = "a photo of a"
     cfg.TRAINER.CLIP.CLASS_TOKEN_POSITION = "end"
 
     cfg.TRAINER.VPT = CN()
