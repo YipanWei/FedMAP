@@ -15,3 +15,6 @@ setproctitle
 openpyxl
 tabulate
 gdown
+prettytable
+tensorboard
+timm
