@@ -100,12 +100,11 @@ FedMAP has three main ingredients:
 git clone https://github.com/YipanWei/FedMAP.git
 cd FedMAP
 
-conda create -n fedmap python=3.10 -y
+conda env create -f environment.yml
 conda activate fedmap
-pip install -r requirements.txt
 ```
 
-Install a CUDA-enabled PyTorch build that matches your machine if the default package resolver does not select the correct one.
+The environment file is exported from the development environment used for the public release. It pins Python `3.10.15`, PyTorch `2.4.0`, the PyTorch CUDA `12.1` runtime, and the auxiliary packages required by the local Dassl, CLIP, and trainer implementations.
 
 ### 🩺 Data Preparation
 
@@ -218,7 +217,7 @@ FedMAP/
 │   ├── clip/                    # CLIP implementation used by trainers
 │   └── utils/                   # config, FL, logging, and aggregation helpers
 ├── assets/readme/               # lightweight README figures
-├── requirements.txt
+├── environment.yml              # pinned conda environment
 ├── LICENSE
 └── README.md
 ```
@@ -232,6 +231,12 @@ Default public configs use `50` federated rounds and `1` local epoch:
 ```text
 OPTIM.ROUND: 50
 OPTIM.MAX_EPOCH: 1
+```
+
+Paper results are reported over three random seeds:
+
+```text
+1, 42, 10086
 ```
 
 Supported public trainers:
