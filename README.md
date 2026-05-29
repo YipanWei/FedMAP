@@ -14,44 +14,75 @@
 </p>
 
 <p>
-  <a href="#what-is-fedmap">What is FedMAP?</a> ·
-  <a href="#quick-start">Quick Start</a> ·
-  <a href="#methods">Methods</a> ·
-  <a href="#reproducibility">Reproducibility</a> ·
-  <a href="#citation">Citation</a>
+  <a href="#-motivation">Motivation</a> ·
+  <a href="#-method">Method</a> ·
+  <a href="#-main-results">Main Results</a> ·
+  <a href="#-quick-start">Quick Start</a> ·
+  <a href="#-citation">Citation</a>
 </p>
 
 </div>
 
 ---
 
-## 🌟 What is FedMAP?
+## 🔍 Motivation
 
-FedMAP is a federated prompt learning framework for medical image classification with CLIP-style vision-language models. The project asks a simple question: if medical clients already share strong class-level semantics, should federated prompt learning keep spending most of its capacity on textual tuning?
+Federated prompt learning usually treats CLIP's frozen image encoder as a reliable visual geometry and adapts lightweight textual prompts across clients. In medical images, this assumption is fragile: subtle morphology, center-specific acquisition protocols, and strong inter-class similarity can collapse visual manifolds and misalign neighborhood structure across hospitals.
 
-FedMAP shifts the center of gravity from **textual prompt adaptation** to **visual manifold anchoring**. It keeps fixed semantic class anchors as a shared reference, tracks visual prototypes during federated optimization, and aligns the visual structure across clients without exposing raw medical images.
+FedMAP reframes the problem from **textual tuning** to **visual manifold anchoring**. It keeps semantic class anchors as a shared reference and regularizes the client-side visual space so that local prompt updates preserve a more stable medical feature geometry.
 
-```mermaid
-flowchart LR
-    A[Medical Clients] --> B[Local Prompt Training]
-    B --> C[Visual Prototypes]
-    D[Fixed Semantic Anchors] --> E[Topology Alignment]
-    C --> E
-    E --> F[Federated Aggregation]
-    F --> B
-    F --> G[Global Evaluation]
-```
+<p align="center">
+  <img src="assets/readme/motivation-rank.png" width="49%" alt="Effective-rank evidence for medical manifold collapse">
+  <img src="assets/readme/motivation-consistency.png" width="49%" alt="Neighborhood-consistency evidence for medical topological misalignment">
+</p>
 
-## ✨ Highlights
+## 🧩 Method
 
-| Icon | Feature | Why it matters |
-| --- | --- | --- |
-| 🧭 | Semantic anchoring | Stable text-side class anchors provide a shared coordinate system across hospitals and clients. |
-| 🧬 | Visual manifold alignment | Client visual prototypes are optimized to preserve class-level topology instead of only tuning prompt tokens. |
-| 🛰️ | Federated optimization | Local updates stay lightweight and are aggregated through the public federated training loop. |
-| 🧪 | Reproducible public surface | The release keeps runnable methods, public dataset protocols, launcher scripts, and smoke-testable configs. |
+FedMAP inserts lightweight visual prompts into the frozen CLIP image encoder and optimizes them in a federated loop. A server-side semantic codebook provides a client-invariant reference, while each client learns visual prompts using both classification supervision and geometry-aware regularization.
 
-## 🧱 Repository Map
+<p align="center">
+  <img src="assets/readme/method-overview.png" width="94%" alt="FedMAP method overview">
+</p>
+
+Core components:
+
+- **Manifold Semantic Anchoring (MSA):** aligns image features with LLM-derived semantic anchors to recover discriminative visual directions.
+- **Topology Structural Alignment (TSA):** matches the visual class-relation matrix to the text-derived relation matrix to stabilize inter-class topology.
+- **Federated prompt aggregation:** uploads only lightweight visual prompt parameters; raw medical data remains local.
+
+## 🏆 Main Results
+
+FedMAP consistently improves over federated prompt-learning and CLIP adaptation baselines on dermoscopy, histopathology, and a private ultrasound benchmark. The private benchmark is reported as part of the paper results, but the public code release does not redistribute private data.
+
+<p align="center">
+  <img src="assets/readme/main-results.png" width="96%" alt="Main comparative results on FedISIC, FedCamelyon17, and the private benchmark">
+</p>
+
+Summary over the strongest baselines:
+
+| Benchmark | FedMAP Accuracy | FedMAP Macro-F1 | Improvement |
+| --- | ---: | ---: | --- |
+| FedISIC | 73.29 ± 1.29 | 59.47 ± 1.98 | +7.16 Acc / +19.56 F1 |
+| FedCamelyon17 | 93.15 ± 0.87 | 92.99 ± 0.81 | +2.62 Acc / +2.01 F1 |
+| Private ultrasound | 89.60 ± 1.33 | 88.04 ± 1.83 | +18.85 Acc / +20.84 F1 |
+
+## 📊 Analysis
+
+The analysis studies whether the gain comes from the proposed geometry constraints rather than from larger trainable capacity. FedMAP benefits from both MSA and TSA, converges faster across communication rounds, and remains stable across a broad structural-loss range.
+
+<p align="center">
+  <img src="assets/readme/analysis-ablation.png" width="96%" alt="FedMAP module ablation">
+</p>
+
+<p align="center">
+  <img src="assets/readme/analysis-convergence.png" width="96%" alt="FedMAP convergence curves">
+</p>
+
+<p align="center">
+  <img src="assets/readme/analysis-lambda.png" width="58%" alt="FedMAP lambda sensitivity">
+</p>
+
+## 🗂️ Repository Map
 
 ```text
 FedMAP/
@@ -61,10 +92,11 @@ FedMAP/
 │   ├── trainers/                # FedMAP and public baselines
 │   ├── datasets/                # public dataset wrappers
 │   ├── configs/datasets/        # federated dataset protocols
-│   ├── embeddings/              # minimal semantic anchor resources
+│   ├── embeddings/              # minimal semantic-anchor resources
 │   ├── Dassl/                   # local training infrastructure
 │   ├── clip/                    # CLIP implementation used by trainers
 │   └── utils/                   # config, FL, logging, and aggregation helpers
+├── assets/readme/               # lightweight README figures
 ├── requirements.txt
 ├── LICENSE
 └── README.md
@@ -96,7 +128,7 @@ Scripts/data/
 The public release supports:
 
 | Dataset key | Dataset wrapper | Clients |
-| --- | --- | --- |
+| --- | --- | ---: |
 | `fedisic` | `FedISIC` | 6 |
 | `fedcamelyon` | `FedCamelyon17MD` | 5 |
 
@@ -135,7 +167,7 @@ bash Scripts/run_experiment.sh --trainer FedCLIP --dataset fedcamelyon --seed 1 
 bash Scripts/run_experiment.sh --trainer FedMVP  --dataset fedisic     --seed 42 --gpu 1
 ```
 
-Run a short method smoke test:
+Run a short smoke test:
 
 ```bash
 bash Scripts/run_experiment.sh \
@@ -147,13 +179,13 @@ bash Scripts/run_experiment.sh \
   OPTIM.ROUND 2 OPTIM.MAX_EPOCH 1 OUTPUT_DIR output/smoke_fedproxlpt
 ```
 
-Extra arguments after the launcher options are passed directly to `federated_main.py` / the YACS config system.
+Extra arguments after the launcher options are passed directly to `federated_main.py` and the YACS config system.
 
 ## 🧠 Methods
 
 | Trainer | Role |
 | --- | --- |
-| `FedMAP` | FedMAP-style visual prompt tuning with manifold anchoring. |
+| `FedMAP` | Visual prompt tuning with manifold semantic anchoring and topology structural alignment. |
 | `VPT` | Visual prompt tuning baseline. |
 | `PROMPTFL` | Federated prompt learning baseline. |
 | `FedCLIP` | Federated CLIP-style prompt baseline. |
@@ -203,7 +235,7 @@ The public release has been smoke-tested with all listed trainers on `fedisic` u
 ## 📌 Paper
 
 **Rethinking Federated Prompt Learning for Medical Images: From Textual Tuning to Visual Manifold Anchoring**<br>
-Yipan Wei<br>
+Yipan Wei, Wenke Huang, Yapeng Li, He Li, Qixin Zhang, Mang Ye, Bo Du<br>
 International Conference on Machine Learning (ICML), 2026
 
 OpenReview: https://openreview.net/forum?id=3LymHCdeRd
@@ -213,7 +245,7 @@ OpenReview: https://openreview.net/forum?id=3LymHCdeRd
 ```bibtex
 @inproceedings{wei2026rethinking,
   title={Rethinking Federated Prompt Learning for Medical Images: From Textual Tuning to Visual Manifold Anchoring},
-  author={Wei, Yipan},
+  author={Wei, Yipan and Huang, Wenke and Li, Yapeng and Li, He and Zhang, Qixin and Ye, Mang and Du, Bo},
   booktitle={International Conference on Machine Learning},
   year={2026}
 }
